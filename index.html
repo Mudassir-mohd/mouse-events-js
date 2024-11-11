@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse Events Example</title>
+</head>
+<body>
+
+  <h2>Mouse Events with Keyboard, Form, and Window</h2>
+
+  <!-- Form Section -->
+  <form id="myForm">
+    <label for="textInput">Type something and press Enter:</label>
+    <input type="text" id="textInput" name="textInput">
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Output Section -->
+  <p id="output" style="color: blue; margin-top: 20px;"></p>
+
+  <!-- Window Resize Message -->
+  <div id="resizeMessage" style="margin-top: 20px;"></div>
+
+  <script>
+    // Mouse and Form Events
+    let form = document.getElementById('myForm');
+    let textInput = document.getElementById('textInput');
+    let output = document.getElementById('output');
+
+    // Display a message when the mouse hovers over the input field
+    textInput.addEventListener('mouseenter', () => {
+      output.textContent = 'Mouse is over the input field.';
+    });
+
+    // Clear the message when the mouse leaves the input field
+    textInput.addEventListener('mouseleave', () => {
+      output.textContent = '';
+    });
+
+    // Form submission event
+    form.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevents the form from submitting
+      output.textContent = `Submitted text: ${textInput.value}`;
+      textInput.value = ''; // Clears the input field
+    });
+
+    // Keyboard Event
+    textInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        output.textContent = 'Press Enter to submit the form.';
+      }
+    });
+
+    // Window Resize Event
+    let resizeMessage = document.getElementById('resizeMessage');
+
+    window.addEventListener('resize', () => {
+      resizeMessage.textContent = `Window resized to ${window.innerWidth}x${window.innerHeight}`;
+    });
+
+    // Window Click Event - Click anywhere on the window to change background color
+    window.addEventListener('click', () => {
+      document.body.style.backgroundColor = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+      resizeMessage.textContent = 'Window clicked - background color changed!';
+    });
+  </script>
+</body>
+</html>
